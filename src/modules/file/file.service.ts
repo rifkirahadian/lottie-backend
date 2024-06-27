@@ -1,10 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateFileInput } from './dto/create-file.input';
+import { File } from './entities/file.entity';
 
 @Injectable()
 export class FileService {
+  constructor(
+    @Inject('FILES_REPOSITORY')
+    private filesRepository: typeof File,
+  ) {}
+
   create(createFileInput: CreateFileInput) {
-    return 'This action adds a new file';
+    return createFileInput;
   }
 
   findAll() {
