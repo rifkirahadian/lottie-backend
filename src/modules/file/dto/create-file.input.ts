@@ -1,13 +1,17 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 @InputType()
 export class CreateFileInput {
   @Field()
   @IsNotEmpty()
-  @Length(3, 50)
   name: string;
 
   @Field()
-  email: string;
+  @IsNotEmpty()
+  file: string;
+
+  @Field()
+  @IsNotEmpty()
+  size: number;
 }

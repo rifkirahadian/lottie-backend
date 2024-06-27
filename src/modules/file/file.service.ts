@@ -9,8 +9,8 @@ export class FileService {
     private filesRepository: typeof File,
   ) {}
 
-  create(createFileInput: CreateFileInput) {
-    return createFileInput;
+  create(createFileInput: CreateFileInput): Promise<File> {
+    return this.filesRepository.create({ ...createFileInput });
   }
 
   findAll() {

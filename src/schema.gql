@@ -26,5 +26,6 @@ type Mutation {
 
 input CreateFileInput {
   name: String!
-  email: String!
+  file: String!
+  size: Float!
 }
