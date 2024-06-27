@@ -8,6 +8,7 @@ type File {
   file: String!
   size: Float!
   createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """

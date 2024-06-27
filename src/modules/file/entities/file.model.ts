@@ -16,4 +16,7 @@ export class File {
 
   @Field()
   createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
 }

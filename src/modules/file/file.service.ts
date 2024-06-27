@@ -13,8 +13,8 @@ export class FileService {
     return this.filesRepository.create({ ...createFileInput });
   }
 
-  findAll() {
-    return `This action returns all file`;
+  findAll(): Promise<File[]> {
+    return this.filesRepository.findAll();
   }
 
   findOne(id: number) {
