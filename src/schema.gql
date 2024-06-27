@@ -1,0 +1,30 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type File {
+  id: Int!
+  name: String!
+  file: String!
+  size: Float!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  findAll: [File!]!
+  findOne(id: Float!): File!
+}
+
+type Mutation {
+  createFile(createFileInput: CreateFileInput!): File!
+}
+
+input CreateFileInput {
+  name: String!
+  email: String!
+}
