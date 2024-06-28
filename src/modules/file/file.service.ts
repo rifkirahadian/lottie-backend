@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFileInput } from './dto/create-file.input';
 import { File } from './entities/file.entity';
 
@@ -17,7 +17,11 @@ export class FileService {
     return this.filesRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} file`;
+  async findOne(id: number): Promise<File> {
+    const file = await this.filesRepository.findByPk(id);
+    if (!file) {
+      throw new NotFoundException('File not found');
+    }
+    return file;
   }
 }
