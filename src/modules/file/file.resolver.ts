@@ -13,8 +13,8 @@ export class FileResolver {
   }
 
   @Query(() => [File])
-  findAll() {
-    return this.fileService.findAll();
+  findAll(@Args('search', { nullable: true }) search: string) {
+    return this.fileService.findAll(search);
   }
 
   @Query(() => File)

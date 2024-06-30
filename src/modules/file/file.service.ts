@@ -1,6 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFileInput } from './dto/create-file.input';
 import { File } from './entities/file.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class FileService {
@@ -13,8 +14,18 @@ export class FileService {
     return this.filesRepository.create({ ...createFileInput });
   }
 
-  findAll(): Promise<File[]> {
-    return this.filesRepository.findAll();
+  findAll(search: string | null = null): Promise<File[]> {
+    let where = {};
+    if (search) {
+      where = {
+        name: {
+          [Op.like]: `%${search}%`,
+        },
+      };
+    }
+    const query = this.filesRepository.findAll({ where });
+
+    return query;
   }
 
   async findOne(id: number): Promise<File> {
