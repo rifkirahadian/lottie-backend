@@ -14,8 +14,12 @@ export class FileService {
     return this.filesRepository.create({ ...createFileInput });
   }
 
-  findAll(search: string | null = null): Promise<File[]> {
+  findAll(
+    search: string | null = null,
+    sort: string | null = null,
+  ): Promise<File[]> {
     let where = {};
+    const order = [];
     if (search) {
       where = {
         name: {
@@ -23,9 +27,15 @@ export class FileService {
         },
       };
     }
-    const query = this.filesRepository.findAll({ where });
 
-    return query;
+    if (sort) {
+      const parseSort = sort.split('-');
+      if (parseSort.length === 2) {
+        order.push([parseSort[0], parseSort[1]]);
+      }
+    }
+
+    return this.filesRepository.findAll({ where, order });
   }
 
   async findOne(id: number): Promise<File> {
