@@ -26,10 +26,64 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+This Project is small NestJS application to store and view lottie animations
+
+### Technology Used
+- Apollo Server GraphQL
+- Sequelize 
+- Sqlite
+
+### Database Structure
+Files Table
+- id: STRING
+- file: TEXT
+- size: INTEGER
+- updatedAt: DATE
+- createdAt: DATE
+
+### GraphQL Schema
+The graphql documentation are available at /graphql route
+```bash
+type File {
+  id: Int!
+  name: String!
+  file: String!
+  size: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  findAll(search: String, sort: String): [File!]!
+  findOne(id: Float!): File!
+}
+
+type Mutation {
+  createFile(createFileInput: CreateFileInput!): File!
+}
+
+input CreateFileInput {
+  name: String!
+  file: String!
+  size: Float!
+}
+```
+
 ## Installation
 
 ```bash
 $ npm install
+```
+
+## Execute database migration
+
+```bash
+$ npx sequelize db:migrate
 ```
 
 ## Running the app
